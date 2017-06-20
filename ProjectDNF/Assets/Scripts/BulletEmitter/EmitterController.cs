@@ -12,8 +12,28 @@ public class EmitterController : MonoBehaviour
 
     private ObjectPoolContrller m_ObjPool;
 
-	// Use this for initialization
-	void Start ()
+    void Awake()
+    {
+        RegisterDelegateFunction();
+    }
+
+    void OnDestroy()
+    {
+        UnregisterDelegateFunction();
+    }
+
+    private void RegisterDelegateFunction()
+    {
+        Bullet.OnDespawn += OnDespawn;
+    }
+
+    private void UnregisterDelegateFunction()
+    {
+        Bullet.OnDespawn -= OnDespawn;
+    }
+
+    // Use this for initialization
+    void Start ()
     {
         GameObject m_ObjPoolRoot = new GameObject();
         m_ObjPoolRoot.transform.parent = this.transform;
@@ -37,5 +57,10 @@ public class EmitterController : MonoBehaviour
             yield return new WaitForSeconds(m_fInterval);
             m_ObjPool.Spawn();
         }
+    }
+
+    public void OnDespawn(Bullet _bt)
+    {
+        m_ObjPool.DeSpawn(_bt.gameObject);
     }
 }
