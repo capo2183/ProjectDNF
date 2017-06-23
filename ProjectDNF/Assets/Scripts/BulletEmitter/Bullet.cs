@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     public Vector3 m_vecDirection = new Vector3(1.0f, 0.0f, 0.0f);
-    public float m_fSpeed = 5.0f;
+    public float m_fSpeed = 10.0f;
     
-    //*[Delegate Function]
-    public delegate void DespawnBullet(Bullet _bt);
-    public static event DespawnBullet OnDespawn;
-
     private void Start()
     {
         StartCoroutine(DestorySelf());
@@ -29,6 +25,6 @@ public class Bullet : MonoBehaviour {
 
     private void Destroy()
     {
-        OnDespawn(this);
+        this.gameObject.SetActive(false);
     }
 }

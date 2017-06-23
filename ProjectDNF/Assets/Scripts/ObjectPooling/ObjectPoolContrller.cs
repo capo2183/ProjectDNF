@@ -44,8 +44,8 @@ public class ObjectPoolContrller : MonoBehaviour
             if (!_retObj.activeInHierarchy)
             {
                 _retObj.SetActive(true);
-                _retObj.transform.position = _pos;
-                _retObj.transform.rotation = _rot;
+                _retObj.transform.localPosition = _pos;
+                _retObj.transform.localRotation = _rot;
                 return _retObj;
             }
         }
@@ -55,8 +55,8 @@ public class ObjectPoolContrller : MonoBehaviour
             _retObj = Instantiate(m_PooledPrefab) as GameObject;
             _retObj.transform.parent = this.transform;
             _retObj.SetActive(false);
-            _retObj.transform.position = _pos;
-            _retObj.transform.rotation = _rot;
+            _retObj.transform.localPosition = _pos;
+            _retObj.transform.localRotation = _rot;
             m_PooledObjsList.Add(_retObj);
             return _retObj;
         }
